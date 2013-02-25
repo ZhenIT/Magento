@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+       <Mage_PayTpvCom>
+<!-- declare module's version information for database updates -->
+          <version>2.0.0</version>
+       </Mage_PayTpvCom>
+    </modules>
+
+
+    <global>
+<!-- declare model group for new module -->
+        <models>
+<!-- model group alias to be used in Mage::getModel('newmodule/...') -->
+            <paytpvcom>
+<!-- base class name for the model group -->
+                <class>Mage_PayTpvCom_Model</class>
+            </paytpvcom>
+        </models>
+
+<!-- declare resource setup for new module -->
+        <resources>
+<!-- resource identifier -->
+            <paytpvcom_setup>
+<!-- specify that this resource is a setup resource and used for upgrades -->
+                <setup>
+<!-- which module to look for install/upgrade files in -->
+                    <module>Mage_PayTpvCom</module>
+                </setup>
+<!-- specify database connection for this resource -->
+                <connection>
+<!-- do not create new connection, use predefined core setup connection -->
+                    <use>core_setup</use>
+                </connection>
+            </paytpvcom_setup>
+            <paytpvcom_write>
+                <connection>
+                  <use>core_write</use>
+                </connection>
+            </paytpvcom_write>
+            <paytpvcom_read>
+               <connection>
+                <use>core_read</use>
+              </connection>
+            </paytpvcom_read>
+        </resources>
+        <blocks>
+            <paytpvcom>
+              <class>Mage_PayTpvCom_Block</class>
+            </paytpvcom>
+        </blocks>
+    </global>
+
+    <frontend>
+        <secure_url>
+            <paytpvcom_standard>/paytpvcom/standard</paytpvcom_standard>
+        </secure_url>
+        <routers>
+            <paytpvcom>
+                <use>standard</use>
+                <args>
+                    <module>Mage_PayTpvCom</module>
+                    <frontName>paytpvcom</frontName>
+                </args>
+            </paytpvcom>
+        </routers>
+        <translate>
+            <modules>
+                <Mage_PayTpvCom>
+                    <files>
+                        <default>Mage_PayTpvCom.csv</default>
+                    </files>
+                </Mage_PayTpvCom>
+            </modules>
+        </translate>
+        <layout>
+             <updates>
+                  <paytpvcom_redirect>
+                        <file>paytpvcom.xml</file>
+                  </paytpvcom_redirect>
+             </updates>
+        </layout>
+    </frontend>
+
+<!-- declare default configuration values for this module -->
+    <default>
+<!-- 'payment' configuration section (tab) -->
+        <payment>
+<!-- 'newmodule' configuration group (fieldset) -->
+            <paytpvcom>
+<!-- by default this payment method is inactive -->
+                <active>0</active>
+<!-- model to handle logic for this payment method -->
+                <model>paytpvcom/standard</model>
+<!-- order status for new orders paid by this payment method -->
+                <order_status>processing</order_status>
+                <redirect_status>pending</redirect_status>
+				<error_status>canceled</error_status>
+<!-- default title for payment checkout page and order view page -->
+                <title>Tarjeta de credito paytpv</title>
+                <user>demostracion</user>
+                <pass>demo</pass>
+            </paytpvcom>
+         </payment>
+    </default>
+</config>
